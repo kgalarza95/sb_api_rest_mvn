@@ -14,7 +14,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  *
  * @author kgalarza
  */
-@Configuration
+//@Configuration
 public class SwaggerUiConfig {
 
 //    @Bean
