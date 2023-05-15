@@ -44,7 +44,7 @@ public class ApiController {
     }
 
     @PostMapping("/guardar_usuario")
-    public String guardarUsuario(@RequestBody SbUsuario usu) {
+    public Respuesta guardarUsuario(@RequestBody SbUsuario usu) {
         return usuServ.saveUser(usu);
     }
 

@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ver.galarza.kvn.SBApiJdk8.controller;
 
-import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +37,7 @@ public class UsuarioController {
 
 
     @PostMapping
-    public String guardarUsuario(@RequestBody SbUsuario usu) {
+    public Respuesta guardarUsuario(@RequestBody SbUsuario usu) {
         return usuServ.saveUser(usu);
     }
 

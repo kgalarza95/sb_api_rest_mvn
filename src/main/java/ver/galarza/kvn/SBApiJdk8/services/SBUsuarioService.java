@@ -55,17 +55,20 @@ public class SBUsuarioService {
         return respuesta;
     }
 
-    public String saveUser(SbUsuario user) {
-        String respuesta;
+    public Respuesta saveUser(SbUsuario user) {
+        Respuesta respuesta = new Respuesta();
         SbUsuario result = usRepo.save(user);
         System.out.println("==================================================");
         System.out.println("Guardar Usuario");
         Optional<SbUsuario> userOp = Optional.ofNullable(result);
         SbUsuario userRet = null;
         if (userOp.isPresent()) {
-            respuesta = "Transacción Ok.";
+            respuesta.setCodRespuesta("00");
+            respuesta.setMsjRespuesta("ÉXITO! REGISTRO EXISTENTE");
+            respuesta.setDatos(userOp.get());
         } else {
-            throw new RuntimeException("No se pudo encontrar al maestro con el ID: " + user);
+            respuesta.setCodRespuesta("22");
+            respuesta.setMsjRespuesta("ALERTA! DEBE ENVIAR LOS DATOS A ACTUALIZAR");
         }
         return respuesta;
     }
