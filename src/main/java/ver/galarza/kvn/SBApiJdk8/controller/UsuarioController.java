@@ -22,45 +22,36 @@ import ver.galarza.kvn.SBApiJdk8.services.SBUsuarioService;
  * @author kgalarza
  */
 @RestController
-@RequestMapping("/principal")
-public class ControllerPrincipal {
+@RequestMapping("/usuarios")
+public class UsuarioController {
 
     @Autowired
     private SBUsuarioService usuServ;
 
-    @GetMapping("/get_usuario/{id}")
+    @GetMapping("/{id}")
     public Respuesta getUsuarioId(@PathVariable Long id) {
         return usuServ.findByIdUsuario(id);
     }
 
-    @GetMapping("/get_usuarios")
+    @GetMapping
     public Respuesta getTodosUsuarios() {
         return usuServ.findAll();
     }
 
-    @RequestMapping("/get_data")
-    public String metodoGet() {
-        return "Hola mundo";
-    }
 
-    @PostMapping("/guardar_usuario")
+    @PostMapping
     public String guardarUsuario(@RequestBody SbUsuario usu) {
         return usuServ.saveUser(usu);
     }
 
-    @PutMapping("/update_usuario")
+    @PutMapping
     public Respuesta updateUsuario(@RequestBody SbUsuario usu) {
         return usuServ.updateUser(usu);
     }
 
-    @DeleteMapping("/eliminar_usuario/{id}")
+    @DeleteMapping("/{id}")
     public Respuesta eliminarUsuarioId(@PathVariable Long id) {
         return usuServ.deleteUserId(id);
-    }
-
-    @DeleteMapping("/eliminar_usuario")
-    public Respuesta eliminarUsuario() {
-        return usuServ.deleteUserId(Long.valueOf(12));
     }
 
 }
