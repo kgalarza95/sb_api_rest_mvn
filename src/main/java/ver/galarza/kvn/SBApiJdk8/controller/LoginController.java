@@ -9,6 +9,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import ver.galarza.kvn.SBApiJdk8.dto.Respuesta;
 import ver.galarza.kvn.SBApiJdk8.dto.User;
+import ver.galarza.kvn.SBApiJdk8.services.SBUsuarioService;
 
 /**
  *
@@ -26,13 +29,26 @@ import ver.galarza.kvn.SBApiJdk8.dto.User;
 @RequestMapping("/login")
 public class LoginController {
 
+    @Autowired
+    private SBUsuarioService usuServ;
+
     @PostMapping
     public User login(@RequestParam("user") String username, @RequestParam("password") String pwd) {
-
-        String token = getJWTToken(username);
         User user = new User();
-        user.setUser(username);
-        user.setToken(token);
+        Respuesta respuesta = usuServ.buscarUsuario(username, pwd);
+
+        if (respuesta.getIsExito()) {
+            user.setCod(respuesta.getCodRespuesta());
+            user.setSms(respuesta.getMsjRespuesta());
+            String token = getJWTToken(username);
+            user.setUser(username);
+            user.setToken(token);
+        } else {
+            user.setCod(respuesta.getCodRespuesta());
+            user.setSms(respuesta.getMsjRespuesta());
+            user.setUser(username);
+        }
+
         return user;
     }
 

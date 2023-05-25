@@ -4,6 +4,7 @@
  */
 package ver.galarza.kvn.SBApiJdk8.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +24,9 @@ public class SbUsuario {
     private Long id;
     private String nombres;
     private String apellidos;
+    @Column(unique = true)
+    private String usuario;
+    private String pass;
 
     public Long getId() {
         return id;
@@ -46,6 +50,22 @@ public class SbUsuario {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
 }

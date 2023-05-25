@@ -55,6 +55,7 @@ public class SbApiJdk8Application {
                     .anyRequest().authenticated() // Resto de las rutas requieren autenticación
                     .and()
                     .addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+        
         }
     }
 
